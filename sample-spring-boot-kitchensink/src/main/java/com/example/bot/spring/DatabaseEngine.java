@@ -29,16 +29,19 @@ public class DatabaseEngine {
 		BufferedReader br = null;
 		InputStreamReader isr = null;
 		try {
+			String[] textparts = text.split(":");
 			isr = new InputStreamReader(
                     this.getClass().getResourceAsStream(FILENAME));
 			br = new BufferedReader(isr);
 			String sCurrentLine;
-			
-			while (result == null && (sCurrentLine = br.readLine()) != null) {
-				String[] parts = sCurrentLine.split(":");
-				if (text.toLowerCase().equals(parts[0].toLowerCase())) {
-					result = parts[1];
+			for (int i = 0; i < textparts.length; i++) {
+				while (result == null && (sCurrentLine = br.readLine()) != null) {
+					String[] parts = sCurrentLine.split(":");
+					if (text.toLowerCase().equals(parts[0].toLowerCase())) {
+						result = parts[1];
+					}
 				}
+				if (result != null) break;
 			}
 		} catch (IOException e) {
 			log.info("IOException while reading file: {}", e.toString());
