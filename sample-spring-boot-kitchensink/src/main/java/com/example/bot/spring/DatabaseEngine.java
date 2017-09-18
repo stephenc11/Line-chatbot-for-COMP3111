@@ -34,11 +34,13 @@ public class DatabaseEngine {
                     this.getClass().getResourceAsStream(FILENAME));
 			br = new BufferedReader(isr);
 			String sCurrentLine;
+			String[][] parts = new String[10][];
 			
+			int r = 0;
 			int i = 0;
 			while ((sCurrentLine = br.readLine())!= null){
-				String[] parts[i] = sCurrentLine.split(":");
-				i++;
+				parts[r] = sCurrentLine.split(":");
+				r++;
 			}
 			
 			for (String s:textparts) {
