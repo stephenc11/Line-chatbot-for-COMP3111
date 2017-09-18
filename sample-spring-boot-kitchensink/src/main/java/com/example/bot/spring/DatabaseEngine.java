@@ -29,19 +29,19 @@ public class DatabaseEngine {
 		BufferedReader br = null;
 		InputStreamReader isr = null;
 		try {
-			String[] textparts = text.split("[\\p{Punct}\\s]+");
+			String[] textparts = text.split("\\P{L}+");
 			isr = new InputStreamReader(
                     this.getClass().getResourceAsStream(FILENAME));
 			br = new BufferedReader(isr);
 			String sCurrentLine;
-			for (int i = 0; i < textparts.length; i++) {
+			for (String s:textparts) {
 				while (result == null && (sCurrentLine = br.readLine()) != null) {
 					String[] parts = sCurrentLine.split(":");
-					if (textparts[i].toLowerCase().equals(parts[0].toLowerCase())) {
+					if (s.toLowerCase().equals(parts[0].toLowerCase())) {
 						result = parts[1];
 					}
 				}
-				if (result != null) break;
+				//if (result != null) break;
 			}
 		} catch (IOException e) {
 			log.info("IOException while reading file: {}", e.toString());
