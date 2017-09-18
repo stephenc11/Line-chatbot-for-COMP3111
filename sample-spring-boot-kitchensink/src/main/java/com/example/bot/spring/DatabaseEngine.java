@@ -37,7 +37,7 @@ public class DatabaseEngine {
 			
 			int i = 0;
 			while ((sCurrentLine = br.readLine())!= null){
-				String[i][] parts = sCurrentLine.split(":");
+				String[] parts[i] = sCurrentLine.split(":");
 				i++;
 			}
 			
