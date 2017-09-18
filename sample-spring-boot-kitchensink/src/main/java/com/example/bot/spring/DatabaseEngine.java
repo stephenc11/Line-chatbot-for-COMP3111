@@ -29,7 +29,7 @@ public class DatabaseEngine {
 		BufferedReader br = null;
 		InputStreamReader isr = null;
 		try {
-			String[] textparts = text.split("\\P{L}+");
+			String[] textparts = text.split(" ");
 			isr = new InputStreamReader(
                     this.getClass().getResourceAsStream(FILENAME));
 			br = new BufferedReader(isr);
@@ -41,7 +41,7 @@ public class DatabaseEngine {
 						result = parts[1];
 					}
 				}
-				//if (result != null) break;
+				if (result != null) break;
 			}
 		} catch (IOException e) {
 			log.info("IOException while reading file: {}", e.toString());
