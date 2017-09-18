@@ -34,13 +34,30 @@ public class DatabaseEngine {
                     this.getClass().getResourceAsStream(FILENAME));
 			br = new BufferedReader(isr);
 			String sCurrentLine;
+			
+			int i = 0;
+			while ((sCurrentLine = br.readLine())!= null){
+				String[i][] parts = sCurrentLine.split(":");
+				i++;
+			}
+			
 			for (String s:textparts) {
-				while (result == null && (sCurrentLine = br.readLine()) != null) {
-					String[] parts = sCurrentLine.split(":");
-					if (s.toLowerCase().equals(parts[0].toLowerCase())) {
-						result = parts[1];
+				for (String[] t:parts) {
+					if (s.toLowerCase().equals(t[0].toLowerCase())){
+						result = t[1];
+						break;
 					}
 				}
+			}
+			
+			//for (String s:textparts) {
+			//	while (result == null && (sCurrentLine = br.readLine()) != null) 
+			//	{
+			//		String[] parts = sCurrentLine.split(":");
+			//		if (s.toLowerCase().equals(parts[0].toLowerCase())) {
+			//			result = parts[1];
+			//		}
+			//	}
 				if (result != null) break;
 			}
 		} catch (IOException e) {
