@@ -29,7 +29,7 @@ public class DatabaseEngine {
 		BufferedReader br = null;
 		InputStreamReader isr = null;
 		try {
-			String[] textparts = text.split("\\W+");
+			String[] textparts = text.split("\\P{L}+");
 			isr = new InputStreamReader(
                     this.getClass().getResourceAsStream(FILENAME));
 			br = new BufferedReader(isr);
