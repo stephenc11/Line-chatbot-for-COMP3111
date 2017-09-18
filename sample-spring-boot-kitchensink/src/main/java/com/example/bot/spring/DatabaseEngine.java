@@ -58,8 +58,9 @@ public class DatabaseEngine {
 			//			result = parts[1];
 			//		}
 			//	}
-				if (result != null) break;
-			}
+			//	if (result != null) break;
+			// }
+			
 		} catch (IOException e) {
 			log.info("IOException while reading file: {}", e.toString());
 		} finally {
