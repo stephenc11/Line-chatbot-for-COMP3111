@@ -12,7 +12,24 @@ public class SQLDatabaseEngine extends DatabaseEngine {
 	@Override
 	String search(String text) throws Exception {
 		//Write your code here
-		return null;
+		String result = null;
+		try{
+			Connection connection = getConnection();
+			PreparedStatement stmt = connection.prepareStatement("SELECT * FROM t1");
+			Result rs = stmt.executeQuery();
+			while (result == null && (rs.next())){
+				if (text.toLowerCase().contains(rs.getString(2).toLowerCase())) results = rs.getString(3);
+			}
+		} catch (IOException e) {
+			log.info("IOException: {}", e.toString());
+		}	
+		finally{
+			rs.close();
+			stmt.close();
+			connection.close();
+			if (result != null) return result;		
+		}
+		throw new Exception("NOT FOUND");
 	}
 	
 	
