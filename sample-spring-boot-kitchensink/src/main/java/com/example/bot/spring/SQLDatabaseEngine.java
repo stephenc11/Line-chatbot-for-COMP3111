@@ -16,17 +16,17 @@ public class SQLDatabaseEngine extends DatabaseEngine {
 		try{
 			Connection connection = getConnection();
 			PreparedStatement stmt = connection.prepareStatement("SELECT * FROM t1");
-			Result rs = stmt.executeQuery();
+			ResultSet rs = stmt.executeQuery();
 			while (result == null && (rs.next())){
-				if (text.toLowerCase().contains(rs.getString(2).toLowerCase())) results = rs.getString(3);
+				if (text.toLowerCase().contains(rs.getString(2).toLowerCase())) result = rs.getString(3);
 			}
-		} catch (IOException e) {
-			log.info("IOException: {}", e.toString());
-		}	
-		finally{
 			rs.close();
 			stmt.close();
 			connection.close();
+		} catch (URISyntaxException e) {
+			log.info("IOException: {}", e.toString());
+		}	
+		finally{
 			if (result != null) return result;		
 		}
 		throw new Exception("NOT FOUND");
