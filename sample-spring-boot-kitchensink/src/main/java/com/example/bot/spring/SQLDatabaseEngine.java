@@ -16,9 +16,20 @@ public class SQLDatabaseEngine extends DatabaseEngine {
 		try{
 			Connection connection = getConnection();
 			PreparedStatement stmt = connection.prepareStatement("SELECT * FROM t1");
+			PreparedStatement stmt1;
 			ResultSet rs = stmt.executeQuery();
 			while (result == null && (rs.next())){
-				if (text.toLowerCase().contains(rs.getString(2).toLowerCase())) result = rs.getString(3);
+				if (text.toLowerCase().contains(rs.getString(2).toLowerCase())) {result = rs.getString(3);
+	int temp = rs.getInt(4);			
+	String str = "UPDATE t1 SET Hits = ";
+	str += (temp + 1);
+	str += "WHERE id = '";
+	str += rs.getInt(1);
+	str += "';";
+	stmt1 = connection.prepareStatement(str);
+	stmt1.executeQuery();
+	result += (temp+1);
+	}
 			}
 			rs.close();
 			stmt.close();
